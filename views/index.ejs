@@ -7,14 +7,45 @@
 
     <div class="text-2xl mb-4">Welcome <%= user.name %></div>
 
+    <form id="onboard-account-info" class="onboard-form" action="<%= process.env.FORM_HANDLER %>" method="POST">
+
+        <div class="flex flex-col mb-4">
+            <label for="email" class="mb-2 uppercase font-bold text-lg text-grey-darkest">Email</label>
+            <input name="email" id="onboard-email" type="email" class="border py-2 px-3 text-grey-darkest" required="required"
+                   placeholder="Enter your email" value="<%= user.email %>" readonly>
+        </div>
+
+        <div class="flex flex-col mb-4">
+            <label for="first name" class="mb-2 uppercase font-bold text-lg text-grey-darkest">First Name</label>
+            <input name="first name" id="onboard-first-name" type="text" class="border py-2 px-3 text-grey-darkest" required="required"
+                   placeholder="Your first name">
+        </div>
+
+        <div class="flex flex-col mb-4">
+            <label for="last name" class="mb-2 uppercase font-bold text-lg text-grey-darkest">Last Name</label>
+            <input name="last name" id="onboard-last-name" type="text" class="border py-2 px-3 text-grey-darkest" required="required"
+                   placeholder="Your last name">
+        </div>
+
+        <div class="flex flex-col mb-4">
+            <label for="company" class="mb-2 uppercase font-bold text-lg text-grey-darkest">Company Name</label>
+            <input name="company" id="onboard-company-name" type="text" class="border py-2 px-3 text-grey-darkest" required="required"
+                   placeholder="Your company name">
+        </div>
+
+        <div class="flex">
+            <button data-onboarding-next-screen-1 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    type="submit">Save and Continue
+            </button>
+        </div>
+    </form>
+
     <% if (user.profilePictureUrl) { %>
         <img class="block py-3" src="<%= user.profilePictureUrl %>" width="300">
     <% } %>
 
-    <p>You are logged in.</p>
-
     <p class="py-3">
-        This is the content of <code class="bg-gray-200">userProfile</code>.<br>
+        DEBUG: content of <code class="bg-gray-200">userProfile</code>.<br>
     </p>
 
     <pre class="block bg-gray-300 p-4 text-sm overflow-scroll"><%= userProfile %></pre>
