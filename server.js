@@ -26,9 +26,9 @@ const config = {
     attemptSilentLogin: true
 };
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 if (!config.baseURL && !process.env.BASE_URL && process.env.PORT && process.env.NODE_ENV !== 'production') {
-    config.baseURL = `http://auth.scylladb.com:${port}`;
+    config.baseURL = `https://pardot-profiler.fly.dev:${port}`;
 }
 
 app.use(auth(config));

@@ -1,14 +1,13 @@
 <%- include('partials/header') -%>
 
-<h1 class="text-4xl">Your Profile</h1>
+<h1 class="text-4xl">Let's customize your setup</h1>
 
 <% if (locals.isAuthenticated) { %>
     <% var user = JSON.parse(userProfile); %>
 
-    <div class="text-2xl mb-4">Welcome <%= user.name %></div>
+    <div class="text-1xl mb-4">Welcome <%= user.name %>, this will help us provide relevant reference architecture and resources.</div>
 
-    <form id="onboard-account-info" class="onboard-form" action="<%= process.env.FORM_HANDLER %>" method="POST">
-
+    <form id="onboard-account-info" class="onboard-form" action="<%= process.env.FORM_HANDLER %>" method="POST" onsubmit="return updateProfile(event)">
         <div class="flex flex-col mb-4">
             <label for="email" class="mb-2 uppercase font-bold text-lg text-grey-darkest">Email</label>
             <input name="email" id="onboard-email" type="email" class="border py-2 px-3 text-grey-darkest" required="required"
@@ -35,10 +34,53 @@
 
         <div class="flex">
             <button data-onboarding-next-screen-1 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                    type="submit">Save and Continue
+                    type="submit">Continue
             </button>
         </div>
     </form>
+
+    <script>
+        async function updateProfile(event) {
+            event.preventDefault();
+
+            const form = event.target;
+            const formData = new FormData(form);
+            const userProfile = {
+                metadata: {
+                    company: formData.get('company')
+                },
+            };
+
+            try {
+                // Update the user profile on Frontegg
+                const resp = await fetch('<%= baseUrl %>/identity/resources/users/v2/me', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: 'Bearer <%= accessToken %>'
+                    },
+                    body: JSON.stringify(userProfile)
+                });
+
+                const data = await resp.json();
+                console.log(data);
+
+                // Submit the form to the form handler on Pardot
+                form.submit();
+
+                // Extract redirect_uri from query parameters
+                const urlParams = new URLSearchParams(window.location.search);
+                const redirectUri = urlParams.get('redirect_uri');
+
+                // Redirect to the URL with redirect_uri
+                if (redirectUri) {
+                    window.location.href = redirectUri;
+                }
+            } catch (error) {
+                console.error('Error updating profile:', error);
+            }
+        }
+    </script>
 
     <% if (user.profilePictureUrl) { %>
         <img class="block py-3" src="<%= user.profilePictureUrl %>" width="300">
