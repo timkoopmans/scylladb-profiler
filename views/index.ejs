@@ -46,6 +46,9 @@
             const form = event.target;
             const formData = new FormData(form);
             const userProfile = {
+                email: formData.get('email'),
+                firstName: formData.get('first name'),
+                lastName: formData.get('last name'),
                 metadata: {
                     company: formData.get('company')
                 },
