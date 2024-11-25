@@ -21,7 +21,7 @@ const config = {
     authRequired: true,
     authorizationParams: {
         response_type: 'code',
-        scope: 'openid email',
+        scope: 'openid email profile',
     },
     attemptSilentLogin: true
 };
