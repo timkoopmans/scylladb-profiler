@@ -10,25 +10,25 @@
     <form id="onboard-account-info" class="onboard-form" action="<%= process.env.FORM_HANDLER %>" method="POST" onsubmit="return updateProfile(event)">
         <div class="flex flex-col mb-4">
             <label for="email" class="mb-2 uppercase font-bold text-lg text-grey-darkest">Email</label>
-            <input name="email" id="onboard-email" type="email" class="border py-2 px-3 text-grey-darkest" required="required"
+            <input name="email" id="email" type="email" class="border py-2 px-3 text-grey-darkest" required="required"
                    placeholder="Enter your email" value="<%= user.email %>" readonly>
         </div>
 
         <div class="flex flex-col mb-4">
-            <label for="first name" class="mb-2 uppercase font-bold text-lg text-grey-darkest">First Name</label>
-            <input name="first name" id="onboard-first-name" type="text" class="border py-2 px-3 text-grey-darkest" required="required"
+            <label for="first_name" class="mb-2 uppercase font-bold text-lg text-grey-darkest">First Name</label>
+            <input name="first_name" id="first_name" type="text" class="border py-2 px-3 text-grey-darkest" required="required"
                    placeholder="Your first name">
         </div>
 
         <div class="flex flex-col mb-4">
-            <label for="last name" class="mb-2 uppercase font-bold text-lg text-grey-darkest">Last Name</label>
-            <input name="last name" id="onboard-last-name" type="text" class="border py-2 px-3 text-grey-darkest" required="required"
+            <label for="last_name" class="mb-2 uppercase font-bold text-lg text-grey-darkest">Last Name</label>
+            <input name="last_name" id="last_name" type="text" class="border py-2 px-3 text-grey-darkest" required="required"
                    placeholder="Your last name">
         </div>
 
         <div class="flex flex-col mb-4">
             <label for="company" class="mb-2 uppercase font-bold text-lg text-grey-darkest">Company Name</label>
-            <input name="company" id="onboard-company-name" type="text" class="border py-2 px-3 text-grey-darkest" required="required"
+            <input name="company" id="company" type="text" class="border py-2 px-3 text-grey-darkest" required="required"
                    placeholder="Your company name">
         </div>
 
